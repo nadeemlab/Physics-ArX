@@ -1,0 +1,2 @@
+set -ex
+python test.py --dataroot ./datasets/msk_aapm_combined --name msk_aapm_combined_no_stablization --phase test --mode eval --model pix2pix3d --netG unet_128 --input_nc 1 --output_nc 2 --direction BtoA --dataset_mode cbct2ct3d --norm batch

@@ -1,0 +1,2 @@
+set -ex
+python train.py --dataroot ./datasets/msk_aapm_combined --netG unet_128 --name test --input_nc 1 --output_nc 2 --model pix2pix3d --direction BtoA --lambda_L1 100 --dataset_mode cbct2ct3d --norm batch --batch_size 1 --pool_size 0 --display_port 8097 --lr 0.0001 --display_freq 1000 --print_freq 1
