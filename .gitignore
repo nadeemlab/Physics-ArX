@@ -1,0 +1,9 @@
+*.jpg
+*.jpeg
+*.png
+*.npy
+*.npz
+*.nrrd
+__pycache__
+*.spyproject
+*.idea

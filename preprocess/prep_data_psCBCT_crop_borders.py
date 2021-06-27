@@ -208,7 +208,7 @@ def save_case_combined_rtstructs_aapm(heart, lungs, cord, eso, cbct, ct, subcase
 
 
 def process_case_aapm(base_dir, case, out_dir):
-  # For AAPM data, subcases are extracted out into single parent folder and there is no GTV. Rest of the processing is same
+  # For AAPM data, subcases are extracted out into single parent folder and there is no GTV and Dose. Rest of the processing is same
   print("Case: ", case)
   subcase = case
   if '_pCT_OSSART_' in subcase:

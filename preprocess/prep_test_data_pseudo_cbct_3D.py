@@ -35,7 +35,7 @@ def fix_size(filename, is_mask=True, expected_shape=(128,128,128)):
   return img
       
 def save_case_combined_rtstructs(heart, lungs, cord, eso,
-              gtv, cbct, ct, dose, subcase, out_folder):
+              cbct, ct, subcase, out_folder):
   # Combine all rtstructs into one image:
     # BG = 0, Eso = 1, GTV = 2, Cord = 3, Heart = 4, Lungs = 5
   RT_Structs = np.zeros((128,128,128), dtype=np.uint8)
@@ -45,10 +45,10 @@ def save_case_combined_rtstructs(heart, lungs, cord, eso,
   RT_Structs[np.where(heart==1)] = 2
   RT_Structs[np.where(lungs==1)] = 1
 
-  maxm = dose.max()
-  minm = dose.min()
-  if maxm > 0:
-    dose /= (maxm - minm)
+  # maxm = dose.max()
+  # minm = dose.min()
+  # if maxm > 0:
+  #   dose /= (maxm - minm)
 
   # Some CBCT/CT pairs have range > 1. Rescale (clip?) these to have range [0 1]
   maxm = cbct.max()
@@ -59,7 +59,8 @@ def save_case_combined_rtstructs(heart, lungs, cord, eso,
     ct /= maxm
   
   out_path = os.path.join(out_folder, '{}'.format(subcase))
-  np.savez(out_path, CT=ct, CBCT=cbct, DOSE=dose, RTSTRUCTS=RT_Structs)
+  # np.savez(out_path, CT=ct, CBCT=cbct, DOSE=dose, RTSTRUCTS=RT_Structs)
+  np.savez(out_path, CT=ct, CBCT=cbct, RTSTRUCTS=RT_Structs)
     
 def process_case(base_dir, case, out_dir):
   # Process case with case_name; All cases have 5 structs + dose + Plan CT and Pseudo CBCT
@@ -88,12 +89,17 @@ def process_case(base_dir, case, out_dir):
     else:
       print('\tUnknown file type ...')
         
-  save_case_combined_rtstructs(heart, lungs, cord, eso, gtv, cbct, ct, dose, case, out_dir)
+  save_case_combined_rtstructs(heart, lungs, cord, eso, cbct, ct, case, out_dir)
         
-base_dir = '/data/MSKCC-Intern-Summer-2020/codes/CBCT-to-CT-Translation/PseudoCBCTs/Summer_Interns/test_psCBCT_MSK'
-case_file = './test_pseudocbct.txt'
+# base_dir = '/data/MSKCC-Intern-Summer-2020/codes/CBCT-to-CT-Translation/PseudoCBCTs/Summer_Interns/test_psCBCT_MSK'
+# case_file = './test_pseudocbct.txt'
+# #case_file = './test_pscbct_validation_added.txt'
+# out_dir = '../datasets/pseudo_cbct3D/test'
+
+base_dir = '/data/MSKCC-Intern-2021/codes/CBCT2CT-Translation-Segmentation-Official-Repo/Physics-ArX/test-AAPM'
+case_file = './test_pseudocbct_aapm1.txt'
 #case_file = './test_pscbct_validation_added.txt'
-out_dir = '../datasets/pseudo_cbct3D/test'
+out_dir = '../datasets/psAAPM/test'
 
 if not os.path.exists(out_dir):
     os.makedirs(out_dir)

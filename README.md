@@ -77,6 +77,19 @@ You can find more options in:
 * **./options/train_options.py** for advanced training options.
 * **./options/test_options.py** for advanced testing options.
 
+## Datasets
+The best model in our paper was trained with a combination of our internal Memorial Sloan Kettering Cancer Center (MSKCC) data 
+and AAPM Thoracic Auto-segmentation Challenge data (http://aapmchallenges.cloudapp.net/competitions/3). Unfortunately, MSKCC data 
+cannot be publicly released due to data privacy concerns. However, AAPM data is available publicly.
+We have augmented the AAPM data (which only contained plan CT and OAR segmentations) using our physics-based 
+augmentation techniques followed by geometric (rotation/scale/shear/noise) augmentations to generate perfectly paired pCT/psCBCT/OAR pairs which can be used for training/testing. 
+This augmented data is available for download [here](https://zenodo.org/record/5035494#.YNjIqnVKi0o). 
+The data needs to be converted to numpy (*.npz) format for training/testing using intructions above.
+
+An example dataset is generated using ./preprocess/prep_test_data_pseudo_cbct_3D.py. The npz file is 
+saved in ./datasets/psAAPM/test folder and the resulting synthetic CT and OAR segmentation, after running the testing script using the trained model, is saved in 
+./results/msk_aapm_stabilized_eso4/test_latest/npz_images
+
 ## Issues
 Please report all issues on the public forum.
 

@@ -49,8 +49,6 @@ class Pix2Pix3DModel(BaseModel):
         # specify the images you want to save/display. The training/test scripts will call <BaseModel.get_current_visuals>
         self.visual_names = ['real_A', 'fake_B', 'real_B']
         self.epoch_num = 0
-        self.stabilize_training = opt.stabilize
-        self.total_epochs = opt.n_epochs + opt.n_epochs_decay + 20 # Total epochs to be run
         
         # specify the models you want to save to the disk. The training/test scripts will call <BaseModel.save_networks> and <BaseModel.load_networks>
         if self.isTrain:
@@ -67,6 +65,8 @@ class Pix2Pix3DModel(BaseModel):
 
         if self.isTrain:
             # define loss functions
+            self.stabilize_training = opt.stabilize
+            self.total_epochs = opt.n_epochs + opt.n_epochs_decay + 20  # Total epochs to be run
             self.criterionGAN = networks.GANLoss(opt.gan_mode).to(self.device)
             self.criterionL1 = torch.nn.L1Loss()
             
