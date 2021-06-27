@@ -77,7 +77,7 @@ You can find more options in:
 * **./options/train_options.py** for advanced training options.
 * **./options/test_options.py** for advanced testing options.
 
-## Datasets
+## Public Dataset:
 The best model in our paper was trained with a combination of our internal Memorial Sloan Kettering Cancer Center (MSKCC) data 
 and AAPM Thoracic Auto-segmentation Challenge data (http://aapmchallenges.cloudapp.net/competitions/3). Unfortunately, MSKCC data 
 cannot be publicly released due to data privacy concerns. However, AAPM data is available publicly.
