@@ -90,6 +90,59 @@ An example dataset is generated using ./preprocess/prep_test_data_pseudo_cbct_3D
 saved in ./datasets/psAAPM/test folder and the resulting synthetic CT and OAR segmentation, after running the testing script using the trained model, is saved in 
 ./results/msk_aapm_stabilized_eso4/test_latest/npz_images
 
+## Physics-based Augmentation Pipeline:
+The multi-task CBCT to CT translation and OAR segmentation models are based on a physics-based artifact/noise induction data augmentation pipeline.
+Broadly, this is a methodology to extract different types of noise artifacts from CBCT images and adding these noise artifacts to planning CT (pCT) images
+to generate several synthetic pseudo-CBCT (psCBCT) images from a single registered pair of CT-CBCT images. These synthetic CBCT/CT are further augmented with
+geometric augmentations leading to creation of large database of perfectly paired pCT/psCBCT images from a small set of registered pCT and week1 CBCT images.
+This physics-based augmentation process is described in our separate paper: Generalizable cone beam CT esophagus segmentation using physics-based data augmentation [link](https://pubmed.ncbi.nlm.nih.gov/33535199/) .
+There are several steps in this process and we provide code with data samples for all steps.
+### Artifact extraction: ###
+The first step is to extract artifacts from deformably registered week1 CBCT using Power Law Adaptive Histogram Equilization. Code for this step is
+in the following folder:
+```
+Physics-based-Augmentation/Artifact-Induction 
+```
+The code was built and tested on Ubuntu 20.04 but the steps should be easily reproducible on other linux based systems. It requires ITK Insight Toolkit [link](https://itk.org/download/) and cmake-gui. Steps:
+* Download and install ITK toolkit. In the extracted ITK directory, do: mkdir BUILD; cd BUILD; ccmake ../ ; configure ('c'), generate ('g'); make; make install;
+* Navigate to each of the sub-directories in Cpp-codes subfolder; mkdir BUILD; cd BUILD; ccmake ../src; configure ('c'), generate ('g'); make;
+* Copy all the executables from last step to where 'CBCT_pCT_Artifact_adding.sh' script is located. Alternatively, change path in the script to point to the executables.
+* A sample pCT and deformably registered week 1 CBCT is is provided in 'Patients' sub-directory.
+* ./CBCT_pCT_Artifact_adding.sh
+* The above step will produce the artifact added CT's which can then be reconstructed using the OS-SART algorithm described next.
+
+### OS-SART based CT image reconstruction: ###
+Artifact induced Pseudo-CBCT images are recontructed using the open source TIGRE libraries. The codes/installation was tested in Anaconda virtual environment. Sample python script to reconstruct pseudo CBCT images is provided in subdirectory:
+```
+Physics-based-Augmentation/OSSART-Reconstruction 
+```
+Prerequisites:
+```del
+NVIDIA GPU (Tested on NVIDIA RTX 2080 Ti)
+CUDA CuDNN: cudatoolkit-dev
+Python 3.7
+numpy
+cython
+simpleitk (conda install -c simpleitk SimpleITK)
+```
+* Download and install TIGRE platform [link](https://github.com/CERN/TIGRE) .
+* To install tigre: git clone https://github.com/CERN/TIGRE
+* Create and activate a new anaconda environment. conda install the above prerequisities.
+* cd TIGRE/Python
+* python setup.py install --user
+* To run the code: conda activate created_environment; python pCT_CBCT_Reconstruction.py
+* Optionally change the path to the artifact added images in the pCT_CBCT_Reconstruction.py script.
+
+### Geometric Augmentation: ###
+The psCBCT images are further enhanced with geometric augmentations using imgaug library. Install the following prerequisities in an anaconda environment.
+```del
+Python 3.7
+conda install -c conda-forge imgaug
+conda install -c conda-forge pynrrd
+conda install scikit-image
+```
+* Run the python script augmentation.py in Physics-based-Augmentation/Geometric-Augmentations subdirectory. A sample dataset from AAPM dataset is provided.
+
 ## Issues
 Please report all issues on the public forum.
 
