@@ -158,8 +158,18 @@ If you find our work useful in your research or if you use parts of this code pl
 @article{Dahiya2021Multitask3C,
   title={Multitask 3D CBCT-to-CT Translation and Organs-at-Risk Segmentation Using Physics-Based Data Augmentation},
   author={N. Dahiya and S. Alam and Pengpeng Zhang and Si-Yuan Zhang and A. Yezzi and S. Nadeem},
-  journal={ArXiv},
+  journal={Medical Physics},
   year={2021},
-  volume={abs/2103.05690}
+}
+
+@article{alam2021generalizable,
+  title={Generalizable cone beam CT esophagus segmentation using physics-based data augmentation},
+  author={Alam, Sadegh R and Li, Tianfang and Zhang, Pengpeng and Zhang, Si-Yuan and Nadeem, Saad},
+  journal={Physics in Medicine \& Biology},
+  volume={66},
+  number={6},
+  pages={065008},
+  year={2021},
+  publisher={IOP Publishing}
 }
 ```
