@@ -112,7 +112,7 @@ The code was built and tested on Ubuntu 20.04 but the steps should be easily rep
 * The above step will produce the artifact added CT's which can then be reconstructed using the OS-SART algorithm described next.
 
 ### OS-SART based CT image reconstruction: ###
-Artifact induced Pseudo-CBCT images are recontructed using the open source TIGRE libraries. The codes/installation was tested in Anaconda virtual environment. Sample python script to reconstruct pseudo CBCT images is provided in subdirectory:
+Artifact induced Pseudo-CBCT images are reconstructed using the open source TIGRE libraries. The codes/installation was tested in Anaconda virtual environment. Sample python script to reconstruct pseudo CBCT images is provided in subdirectory:
 ```
 Physics-based-Augmentation/OSSART-Reconstruction 
 ```
