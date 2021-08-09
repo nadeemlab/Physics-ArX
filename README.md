@@ -84,14 +84,14 @@ cannot be publicly released due to data privacy concerns. However, AAPM data is 
 We have augmented the AAPM data (which only contained plan CT and OAR segmentations) using our physics-based 
 augmentation techniques followed by geometric (rotation/scale/shear/noise) augmentations to generate perfectly paired pCT/psCBCT/OAR pairs which can be used for training/testing. 
 This augmented data is available for download [here](https://zenodo.org/record/5035494#.YNjIqnVKi0o). 
-The data needs to be converted to numpy (*.npz) format for training/testing using intructions above.
+The data needs to be converted to numpy (*.npz) format for training/testing using instructions above.
 
 An example dataset is generated using ./preprocess/prep_test_data_pseudo_cbct_3D.py. The npz file is 
 saved in ./datasets/psAAPM/test folder and the resulting synthetic CT and OAR segmentation, after running the testing script using the trained model, is saved in 
 ./results/msk_aapm_stabilized_eso4/test_latest/npz_images
 
 ## Physics-based Augmentation Pipeline:
-The multi-task CBCT to CT translation and OAR segmentation models are based on a physics-based artifact/noise induction data augmentation pipeline.
+The multitask CBCT to CT translation and OAR segmentation models are based on a physics-based artifact/noise induction data augmentation pipeline.
 Broadly, this is a methodology to extract different types of noise artifacts from CBCT images and adding these noise artifacts to planning CT (pCT) images
 to generate several synthetic pseudo-CBCT (psCBCT) images from a single registered pair of CT-CBCT images. These synthetic CBCT/CT are further augmented with
 geometric augmentations leading to creation of large database of perfectly paired pCT/psCBCT images from a small set of registered pCT and week1 CBCT images.
