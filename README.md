@@ -1,4 +1,17 @@
-### MultiTaskCBCT2CT: Multitask 3D CBCT-to-CT Translation and Organs-at-Risk Segmentation Using Physics-Based Data Augmentation
+### Physics-ArX: Physics-based data augmentation for CT and CBCT quantification in radiotherapy
+
+Physics-ArX python library provides an easy-to-use physics-based data augmentation pipeline for inducing realistic cone-beam CT (CBCT) artifacts on high-quality planning CT images, which results in perfectly paired/registered 3D synthetic CBCT (sCBCT) and planning CT (+ segmentation/dose) data. The motivation behind Physics-ArX library is to create a computationally cheap and deterministic pipeline to deteriorate high-quality planning CT images to simulate realistic CBCT image variations while leveraging high-quality gross tumor volume (GTV) and organs-at-risk (OARs) segmentations to train robust and generalizable fully-supervised deep learning algorithms (this is in contrast to prior approaches that rely on unpaired CT-CBCT data and error-prone/hallucinating unsupervised deep learning algorithms). Specifically, the scatter artifacts are extracted and transferred from corresponding baseline (pre-treatment) CBCT image whereas the motion artifacts are derived from corresponding 4D CT image (both baseline CBCT and 4D CT images are easily accessible/available in non-small cell lung cancer radiotherapy settings). 
+
+For preliminary data, we have shown that segmentation models trained on our Physics-ArX augmentated data can generalize across CT and CBCT images (**PMB'21**). Moreover, since Physics-ArX results in large number of perfecly-paired/registered planning CT and sCBCT variations, for the first time we also created 3D multitask CBCT-to-CT translation and OAR segmentation deep learning models that can quantify all daily/weekly CBCTs acquired during radiotherapy (**Medical Physics'21**). Finally, we also demonstrated a new motion artifact induction pipeline for CT and CBCT images using 4D CT data in our **AAPM'21 abstract**.     
+
+## Updates:
+- [x] Physics-ArX scatter-artifact induction and data augmentation pipeline, given planning CT and baseline CBCT input
+- [x] Multitask 3D CBCT-to-CT translation and organs-at-risk segmentation using physics-based (scatter artifact induced) data augmentation (**Medical Physics'21**)
+- [ ] Generalizable cross-modal CT and CBCT esophagus segmentation using physics-based (scatter artifact induced) data augmentation (**PMB'21**) 
+- [ ] Motion artifact induction on CT and CBCT using 4D CT data (**AAPM'21**)
+- [ ] Test on sites other than lung, e.g. head-and-neck and pancreas
+
+### Multitask 3D CBCT-to-CT Translation and Organs-at-Risk Segmentation Using Physics-Based Data Augmentation
 
 [Read Link](https://arxiv.org/abs/2103.05690v2)
 
