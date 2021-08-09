@@ -185,4 +185,11 @@ If you find our work useful in your research or if you use parts of this code pl
   year={2021},
   publisher={IOP Publishing}
 }
+
+@article{alam2021motion,
+  title={Physics-based motion artifact simulation in CT/CBCT images using 4DCT phases},
+  author={Alam, Sadegh R and Li, Tianfang and Zhang, Si-Yuan and Zhang, Pengpeng and Nadeem, Saad},
+  journal={AAPM'21 abstract},
+  year={2021}
+}
 ```
