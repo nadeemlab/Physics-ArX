@@ -7,8 +7,10 @@ For preliminary data, we have shown that segmentation models trained on our Phys
 ## Updates:
 - [x] Physics-ArX scatter-artifact induction and data augmentation pipeline, given planning CT and baseline CBCT input
 - [x] Multitask 3D CBCT-to-CT translation and organs-at-risk segmentation using physics-based (scatter artifact induced) data augmentation (**Medical Physics'21**)
-- [ ] Generalizable cross-modal CT and CBCT esophagus segmentation using physics-based (scatter artifact induced) data augmentation (**PMB'21**) 
 - [ ] Motion artifact induction on CT and CBCT using 4D CT data (**AAPM'21**)
+- [ ] Specialized deep learning model for motion artifact correction, given CT or CBCT input
+- [ ] Specialized deep learning model for CBCT-to-CT translation, given weekly/daily CBCT input
+- [ ] Specialized deep learning model for GTV/OAR segmentation, given CT or CBCT input
 - [ ] Test on sites other than lung, e.g. head-and-neck and pancreas
 
 ### Multitask 3D CBCT-to-CT Translation and Organs-at-Risk Segmentation Using Physics-Based Data Augmentation
@@ -132,7 +134,7 @@ The code was built and tested on Ubuntu 20.04 but the steps should be easily rep
 * ./CBCT_pCT_Artifact_adding.sh
 * The above step will produce the artifact added CT's which can then be reconstructed using the OS-SART algorithm described next.
 
-### OS-SART based CT image reconstruction: ###
+### OS-SART based CBCT image reconstruction: ###
 Artifact induced Pseudo-CBCT images are reconstructed using the open source TIGRE libraries. The codes/installation was tested in Anaconda virtual environment. Sample python script to reconstruct pseudo CBCT images is provided in subdirectory:
 ```
 Physics-based-Augmentation/OSSART-Reconstruction 
