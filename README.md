@@ -166,6 +166,17 @@ conda install scikit-image
 ```
 * Run the python script augmentation.py in Physics-based-Augmentation/Geometric-Augmentations subdirectory. A sample dataset from AAPM dataset is provided.
 
+## Create custom dataset using Physics-ArX
+If you have access to your own planning CT images and corresponding CBCTs, you can perform the following steps to create your own physics-augmented dataset. 
+Note, this pipeline will work best if you have baseline CBCTs (acquired within 1-2 days of planning CT acquisition to ensure no change in tumor or the surrounding anatomy). 
+Assuming you don't have significant morphological change between your planning CT and week 1 CBCT image, you will first (1) run deformable image registration (we used LDDMM) via the [ANTs python library](https://stnava.github.io/ANTs/), 
+(2) crop the registered planning CT images to that of the CBCT field-of-view, 
+(3) now you will use the scripts (given in this repository) to 
+(a) [extract the scatter artifacts](https://github.com/nadeemlab/Physics-ArX/edit/main/README.md#artifact-extraction) from the registered CBCT images via Adaptive Histogram Equalization, 
+(b) add these artifacts to the registered/cropped planning CT images, 
+(c) [perform OS-SART CBCT reconstruction](https://github.com/nadeemlab/Physics-ArX#os-sart-based-cbct-image-reconstruction) on these artifact-induced planning CTs via the TIGRE library (with parameter variations given in this repository), and finally 
+(d) perform [additional geometric augmentations](https://github.com/nadeemlab/Physics-ArX#geometric-augmentation). This should give you the physics-augmented dataset to drive your deep learning pipelines for different tasks including artifact correction, image registration, image segmentation, longitudinal image prediction, etc.
+
 ## Issues
 Please report all issues on the public forum.
 
