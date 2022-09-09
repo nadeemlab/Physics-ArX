@@ -177,6 +177,15 @@ Assuming you don't have significant morphological change between your planning C
 (c) [perform OS-SART CBCT reconstruction](https://github.com/nadeemlab/Physics-ArX#os-sart-based-cbct-image-reconstruction) on these artifact-induced planning CTs via the TIGRE library (with parameter variations given in this repository), and finally 
 (d) perform [additional geometric augmentations](https://github.com/nadeemlab/Physics-ArX#geometric-augmentation). This should give you the physics-augmented dataset to drive your deep learning pipelines for different tasks including artifact correction, image registration, image segmentation, longitudinal image prediction, etc.
 
+## Stitching a full 512 x 512 image
+Although the input for the network is 128 cubes it can still be used for larger image volumes. For many machines the standard CBCT output is 512x512x(~128). To do this I used high resolution data, low resolution data, and a normalization method to insure model outputs were scaled the same. It is important to normalize as the model's output can be variable leading to slitching artifacts.
+
+First, overlapping low resolution images were stitched together. Images were cropped to the volume of interest which was about 256x400x128. This image was then downsampled by half in the x and y directions to get an image of 128x200x128. A uniform kernel with strides 10 voxels in the y direction was used to create images for stitching. These images were saved and input into the model. The output of the model was normalized by insuring that the overlap between consecutive windows had the same mean and standard deviation. The mean of all outputs for a given region of the images was taken to give a low resolution image
+
+Second, images were stitched together at the CBCT resolution. The volume of interest was again cropped to 256x400x128. A uniform kernel with strides of 16 in the x and y directions was used to create the images for stitching. The images were stitched by matching the mean and standard deviation of each	high res image to the same region of the low resolution image. In this way a high resolution 512x512x128 image was formed as can be seen below:
+
+![stitched_image](./images/ML_coor_full.gif)**Figure**. *Stitched image from CBCT lung patient to sCT for a 512x512x128 volume.*
+
 ## Issues
 Please report all issues on the public forum.
 
